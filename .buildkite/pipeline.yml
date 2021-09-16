@@ -1,0 +1,19 @@
+steps:
+  - label: ":construction:  Build Docker 'registry-cli' Image"
+    key: "build-registry_cli"
+    plugins:
+      - docker-compose#v3.7.0:
+          build: registry-cli
+          config: .buildkite/docker-compose.yml
+          image-repository: localhost:5000/swoop/registry-cli
+
+  - label: ":docker: Push container to registry"
+    key: "registry-push"
+    depends_on: "build-registry_cli"
+    branches:
+      - "master"
+    plugins:
+      - cirruscomms/docker-compose#v3.8.0b:
+          config: .buildkite/docker-compose.yml
+          push:
+            - registry-cli:localhost:5000/registry-cli:latest
