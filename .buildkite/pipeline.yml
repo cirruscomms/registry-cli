@@ -20,4 +20,4 @@ steps:
       - cirruscomms/docker-compose#v3.8.0b:
           config: .buildkite/docker-compose.yml
           push:
-            - registry-cli:localhost:5000/registry-cli:latest
+            - registry-cli:localhost:5000/swoop/registry-cli:latest
