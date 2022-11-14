@@ -1,8 +1,6 @@
 steps:
   - label: ":construction:  Build Docker 'registry-cli' Image"
     key: "build-registry_cli"
-    agents:
-      queue: "test"
     plugins:
       - docker-compose#v3.7.0:
           build: registry-cli
@@ -11,8 +9,6 @@ steps:
 
   - label: ":docker: Push container to registry"
     key: "registry-push"
-    agents:
-      queue: "test"
     depends_on: "build-registry_cli"
     branches:
       - "master"
